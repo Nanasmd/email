@@ -1,87 +1,160 @@
-#
-README — Système d’analyse intelligente d’e-mails pour projets
+📚 Email Project Extractor - Mode d'emploi
 
-⸻
+👩‍💻 Présentation du projet
 
-Objectif du projet
+Le but de ce projet est de récupérer automatiquement des emails,
+analyser leur contenu avec l'intelligence artificielle (GPT-4),
+extraire les informations de projet (titre, description, client...),
+puis stocker tout cela proprement dans une base de données SQLite et générer des rapports.
 
-Ce projet vise à analyser automatiquement des e-mails afin d’en extraire les informations importantes concernant des projets. L’idée est simple : vous recevez des e-mails au sujet de projets, de leurs échéances, de rôles et de participants. Le système lit ces e-mails, comprend leur contenu, extrait ce qui est important, et stocke le tout dans une base de données. Il peut ensuite générer une fiche de suivi en format HTML, Markdown ou CSV.
+Tout a été conçu avec une architecture propre, professionnelle et modulaire.
 
-⸻
+🛠️ Technologies utilisées
 
-Fonctionnalités principales
-	•	Récupération des e-mails depuis un serveur (comme Gmail)
-	•	Lecture de fichiers e-mails (.eml)
-	•	Extraction automatique des informations suivantes :
-	•	Nom du projet
-	•	Description
-	•	Participants (noms, e-mails, rôles)
-	•	Tâches à réaliser
-	•	Dates importantes (début, fin, délais)
-	•	Utilisation de l’intelligence artificielle (IA) pour comprendre le contenu des mails
-	•	Stockage des données dans une base locale (SQLite)
-	•	Génération automatique de rapports de projet visuels et clairs
+Python 3.11+
 
-⸻
+OpenAI GPT-4 API
 
-Pour qui est ce projet ?
-	•	Les chefs de projets qui reçoivent beaucoup d’e-mails et veulent automatiser le suivi
-	•	Les responsables d’équipe ou freelances gérant plusieurs clients/projets
-	•	Toute personne souhaitant transformer des e-mails bruts en données exploitables facilement
+SQLite3
 
-⸻
+IMAP Client pour lire les emails
 
-Ce qu’il faut retenir, sans être développeur :
-	1.	Le système lit vos mails automatiquement.
-	2.	Il utilise une forme d’intelligence pour comprendre de quoi il est question.
-	3.	Il résume tout cela dans un tableau clair, avec qui fait quoi, quand et sur quel projet.
-	4.	Il crée un rapport que vous pouvez imprimer, partager ou envoyer.
+Pandas pour manipuler les données
 
-⸻
+Logging pour suivre les événements de l’application
 
-Structure du projet (vue simple)
-	•	main.py — Point de démarrage du projet
-	•	email_processor.py — S’occupe de la récupération et lecture des e-mails
-	•	nlp_extractor.py — Fait parler l’intelligence artificielle pour comprendre les mails
-	•	db_manager.py — Stocke et organise les données dans une base de données
-	•	report_generator.py — Crée les rapports de suivi du projet
-	•	config.py — Fichier de configuration (comme un panneau de contrôle)
-	•	utils.py — Outils techniques communs à tout le système
+📂 Architecture du projet
 
-⸻
+arduino
 
-Installation rapide (pour les développeurs)
+email/
+├── src/
+│   ├── analyzer/
+│   ├── config/
+│   ├── core/
+│   ├── database/
+│   ├── fetcher/
+│   ├── reporter/
+│   └── main.py
+├── fiches/
+├── logs/
+├── reports/
+├── requirements.txt
+├── run.sh
+├── clean.sh
+└── README.md
+
+🔥 Mise en place étape par étape
+
+1. Cloner le projet
+
+bash
+
+git clone [URL_DU_PROJET]
+cd email
+
+3. Créer un environnement virtuel Python
+   
+bash
+
+python3 -m venv .venv
+source .venv/bin/activate
+(À refaire à chaque fois que vous revenez travailler dessus)
+
+3. Installer les dépendances nécessaires
+   
+bash
 
 pip install -r requirements.txt
-python main.py
 
+5. Remplir les informations de connexion email + OpenAI
+   
+Ouvre le fichier src/config/config.json et remplis :
 
+json
 
-⸻
+{
+  "imap_server": "imap.gmail.com",
+  "imap_port": 993,
+  "email_user": "VOTRE_EMAIL",
+  "email_pass": "VOTRE_MOT_DE_PASSE_EMAIL",
+  "openai_api_key": "VOTRE_CLE_OPENAI",
+  ...
+}
+Note : Attention aux guillemets "..." autour de chaque valeur.
 
-Exemple d’usage
-	•	Vous déposez un fichier .eml dans le dossier du projet
-	•	Vous lancez le programme
-	•	Il extrait les infos : projet “Refonte Site Web”, deadline 15 mai, tâches, personnes concernées
-	•	Il crée un joli fichier HTML avec toutes les infos dedans
+5. Lancer l'application
+bash
 
-⸻
+./run.sh
 
-Limites actuelles
-	•	Fonctionne mieux avec des e-mails bien structurés
-	•	Peut ne pas comprendre des mails très vagues ou ambigus
+Le script :
 
-⸻
+Active automatiquement l'environnement virtuel .venv
 
-Avenir du projet
-	•	Interface graphique (pas besoin de code)
-	•	Intégration avec d’autres outils comme Notion, Trello ou Slack
-	•	Système d’apprentissage par retour utilisateur (IA améliorée par vos corrections)
+Lance l'application
 
-⸻
+Gère la sortie proprement
 
-Conclusion
+🧹 Nettoyer le projet après usage
+Quand vous voulez tout remettre à zéro :
 
-Ce système vous permet de gagner du temps, de l’organisation et de la clarté. Si vous êtes submergé.e par les e-mails, ce projet transforme le bruit en information claire et utile.
+bash
 
-Un assistant de gestion de projet intelligent, personnalisé, à votre service.
+./clean.sh
+
+Cela va supprimer :
+
+L'environnement .venv
+
+La base de données projects.db
+
+Les logs
+
+Les rapports
+
+Les fiches générées
+
+💡 Comment fonctionne l'application ?
+
+Connexion à votre boîte mail via IMAP
+
+Récupération des derniers emails
+
+Envoi du contenu à GPT-4 pour analyse automatique
+
+Extraction des informations importantes
+
+Stockage dans une base SQLite
+
+Génération de rapports PDF
+
+Archivage automatique de tout
+
+📋 Résumé rapide de l'organisation technique
+
+Composant	Rôle
+fetcher/email_fetcher.py	Connexion et récupération des emails
+analyzer/email_analyzer.py	Analyse des emails via GPT-4
+database/project_database.py	Stockage dans SQLite
+reporter/report_generator.py	Génération des rapports
+core/logger.py	Gestion propre des logs
+config/config.json	Centralisation de toutes les configurations
+
+❗ Points importants
+
+⚙️ Toujours activer .venv avant de lancer l'application
+
+🔐 Ne partagez jamais votre email_pass ou openai_api_key
+
+📜 Si besoin d'arrêter ou réinitialiser → utiliser clean.sh
+
+🏆 Félicitations !
+
+Grâce à ce projet, vous :
+
+Savez lire des mails en Python
+
+Savez utiliser une API GPT-4
+
+Savez organiser un projet proprement
