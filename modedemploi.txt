@@ -1,0 +1,123 @@
+🚀 Mode d’emploi — Lancer le projet « Email Project Extractor »
+
+👩‍💻 1. Ouvrir le Terminal
+
+Sur Mac : appuie sur Command + Espace, tape Terminal, puis appuie sur Entrée.
+
+Sur Windows : utilise Git Bash ou PowerShell.
+
+Important : tout se fait en ligne de commande.
+
+📥 2. Télécharger le projet
+
+Tape cette commande dans ton terminal :
+
+bash
+
+```
+git clone https://github.com/Nanasmd/email.git
+```
+Puis rentre dans le dossier :
+
+bash
+```
+cd email
+```
+
+🛠️ 3. Créer l'environnement Python
+
+Tape :
+
+bash
+```
+python3 -m venv .venv
+```
+
+Cela crée un espace isolé pour le projet.
+
+Puis active l'environnement :
+
+bash
+```
+source .venv/bin/activate
+```
+
+(À refaire à chaque fois avant de travailler sur le projet.)
+
+📦 4. Installer les outils nécessaires
+
+Tape :
+
+bash
+```
+pip install -r requirements.txt
+```
+
+Cela installe tout ce dont l’application a besoin pour fonctionner.
+
+📝 5. Configurer vos accès email et OpenAI
+
+Ouvre le fichier :
+
+bash
+```
+src/config/config.json
+```
+
+Et remplis les cases :
+
+json
+```
+{
+  "email_user": "VOTRE_ADRESSE_EMAIL",
+  "email_pass": "VOTRE_MOT_DE_PASSE_EMAIL",
+  "openai_api_key": "VOTRE_CLE_API_OPENAI",
+  ...
+}
+```
+
+⚠️ Attention de bien mettre des guillemets "..." autour des valeurs.
+
+🚀 6. Lancer l'application
+
+Tape simplement :
+
+bash
+```
+./run.sh
+```
+
+Ce que fait run.sh automatiquement :
+
+Active ton environnement Python .venv
+
+Lance l'application principale
+
+Connecte à ton email
+
+Analyse les emails avec GPT-4
+
+Enregistre les résultats en base de données
+
+Génère les rapports
+
+🧹 7. Tout nettoyer après utilisation (optionnel)
+
+Quand tu veux tout réinitialiser et repartir de zéro :
+
+bash
+```
+./clean.sh
+```
+
+Cela supprime :
+
+.venv (environnement Python)
+
+projects.db (base de données)
+
+Tous les logs/
+
+Tous les reports/
+
+Tous les fiches/
