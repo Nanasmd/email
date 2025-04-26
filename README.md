@@ -50,7 +50,7 @@ email/
 
 bash
 
-git clone [URL_DU_PROJET]
+git clone https://github.com/Nanasmd/email.git
 cd email
 
 3. Créer un environnement virtuel Python
