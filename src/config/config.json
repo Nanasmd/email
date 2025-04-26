@@ -1,0 +1,17 @@
+{
+    "imap_server": "imap.gmail.com",
+    "imap_port": 993,
+    "email_user": "",
+    "email_pass": "",
+    "use_ssl": true,
+    "fetch_limit": 10,
+    "openai_api_key": "",
+    "gpt_model": "gpt-4",
+    "confidence_threshold": 0.75,
+    "database_path": "projects.db",
+    "reports_dir": "reports",
+    "logs_dir": "logs",
+    "max_log_size": 5242880,
+    "backup_log_count": 3
+  }
+  
