@@ -1,3 +1,63 @@
+🧠 1. Pourquoi avoir utilisé un environnement virtuel (.venv) ?
+Réponse :
+👉 « Pour isoler les dépendances du projet. Comme ça, ce que j’installe pour ce projet n’interfère pas avec d'autres projets ou le système global. Ça garantit que tout reste propre et contrôlé. »
+
+🛠️ 2. Pourquoi avoir utilisé run.sh et clean.sh ?
+Réponse :
+👉 « Pour automatiser totalement l'installation, le lancement et le nettoyage. Ça permet de rendre l'utilisation du projet simple même pour quelqu’un qui n’y connaît rien. Un clic, tout fonctionne. Un clic, tout est nettoyé. »
+
+📂 3. Pourquoi avoir structuré le projet en plusieurs dossiers (fetcher/, analyzer/, database/, reporter/, etc.) ?
+Réponse :
+👉 « Pour respecter le principe de séparation des responsabilités (Single Responsibility Principle). Chaque dossier a un rôle clair, ce qui rend le projet plus lisible, maintenable et évolutif. »
+
+📚 4. Que fait le fichier config.json ?
+Réponse :
+👉 « Il centralise toutes les informations sensibles et de configuration (email, mot de passe, clé API, paramètres IMAP, etc.). Ça permet de modifier facilement les paramètres sans toucher au code. »
+
+🔒 5. Pourquoi avoir utilisé des logs ?
+Réponse :
+👉 « Pour suivre tout ce qui se passe dans l'application : connexions, erreurs, étapes importantes. C’est essentiel pour le débogage et le suivi en production. »
+
+📧 6. Comment l'application se connecte-t-elle aux emails ?
+Réponse :
+👉 « Grâce à la librairie imapclient qui dialogue avec le serveur IMAP, en utilisant SSL pour sécuriser la connexion. »
+
+🧠 7. Comment les emails sont-ils analysés ?
+Réponse :
+👉 « On utilise l’API GPT-4 d’OpenAI. On envoie le contenu du mail au modèle avec un prompt spécifique, et GPT-4 extrait pour nous les informations clés comme le titre du projet, sa description, et le client. »
+
+🗄️ 8. Pourquoi stocker dans une base de données (SQLite) ?
+Réponse :
+👉 « Pour garder une trace structurée, durable et consultable de tous les projets extraits. SQLite est parfait car c’est léger, intégré nativement dans Python, et sans serveur nécessaire. »
+
+📑 9. Pourquoi générer des rapports ?
+Réponse :
+👉 « Pour produire des fiches PDF prêtes à être exploitées, partagées ou archivées. Ça donne une forme tangible aux projets extraits, directement utilisable. »
+
+⚡ 10. Que fait le script run.sh exactement ?
+Réponse :
+👉 « Il active l’environnement virtuel, installe automatiquement les dépendances nécessaires, et lance proprement l’application. »
+
+🧹 11. Que fait le script clean.sh exactement ?
+Réponse :
+👉 « Il supprime toute trace du projet localement : environnement virtuel, base de données, logs et rapports générés. Ça permet de repartir de zéro proprement. »
+
+🛡️ 12. Comment sécuriser les mots de passe et la clé OpenAI ?
+Réponse :
+👉 « Ils sont stockés dans config.json, qui doit être protégé. En production réelle, on utiliserait même des variables d'environnement pour plus de sécurité. »
+
+🚀 13. Comment améliorer encore ce projet ?
+Réponse :
+👉 « On pourrait rajouter :
+
+Une interface web (ex: Flask ou FastAPI)
+
+Un tableau de bord pour consulter les projets
+
+De la détection automatique d’emails non lus uniquement
+
+Un chiffrement des données sensibles dans la base de données »
+
 🎯 SCRIPT DE QUESTIONS/RÉPONSES — FICHIER PAR FICHIER
 📂 src/fetcher/email_fetcher.py
 Questions possibles :
