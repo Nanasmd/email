@@ -1,67 +1,73 @@
-import re
-import unicodedata
-import hashlib
-import os
-import importlib.util
+# --- Importation des modules nécessaires ---
+import re                   # Module pour gérer les expressions régulières
+import unicodedata           # Module pour normaliser les caractères (ex : enlever les accents)
+import hashlib               # Module pour générer des empreintes numériques (hash)
+import os                    # Module pour la gestion de fichiers
+import importlib.util        # Module pour vérifier si un module Python est disponible
 from typing import List, Optional
 
+# --- Classe pour les outils liés au traitement de texte ---
 class TextUtils:
     """Outils de traitement de texte pour l'analyse des emails."""
-    
+
     @staticmethod
     def normalize_text(text: str) -> str:
         """
-        Normalise un texte : suppression des accents, mise en minuscules, nettoyage.
-        
+        Nettoie un texte : suppression des accents, mise en minuscules, suppression des caractères spéciaux.
+
         Args:
             text (str): Texte brut.
-        
+
         Returns:
-            str: Texte normalisé.
+            str: Texte propre et normalisé.
         """
         if not text:
             return ""
-        
+
+        # Mise en minuscules
         text = text.lower()
+        # Suppression des accents
         text = unicodedata.normalize('NFKD', text)
         text = ''.join(c for c in text if not unicodedata.combining(c))
+        # Suppression de tout caractère qui n'est pas lettre/chiffre/espace
         text = re.sub(r'[^\w\s]', ' ', text)
+        # Suppression des espaces multiples
         text = re.sub(r'\s+', ' ', text).strip()
-        
+
         return text
 
     @staticmethod
     def extract_emails(text: str) -> List[str]:
         """
-        Extrait toutes les adresses emails d'un texte brut.
-        
+        Extrait toutes les adresses emails contenues dans un texte.
+
         Args:
-            text (str): Texte contenant potentiellement des emails.
-        
+            text (str): Texte brut.
+
         Returns:
-            List[str]: Liste des emails trouvés.
+            List[str]: Liste des emails détectés.
         """
         if not text:
             return []
-        
+
         pattern = r'[\w\.-]+@[\w\.-]+\.\w+'
         return re.findall(pattern, text)
 
     @staticmethod
     def chunk_text(text: str, chunk_size: int = 2000) -> List[str]:
         """
-        Divise un grand texte en morceaux plus petits (ex : pour API GPT).
-        
+        Divise un long texte en morceaux plus petits de taille contrôlée.
+
         Args:
             text (str): Texte à découper.
-            chunk_size (int): Taille maximale par morceau.
-        
+            chunk_size (int): Taille maximale pour chaque morceau.
+
         Returns:
-            List[str]: Liste de chunks.
+            List[str]: Liste de morceaux de texte.
         """
         if not text:
             return []
-        
+
         words = text.split()
         chunks = []
         current_chunk = []
@@ -79,16 +85,17 @@ class TextUtils:
 
         return chunks
 
+# --- Classe pour les outils liés à la gestion des fichiers ---
 class FileUtils:
     """Outils pour la gestion des fichiers."""
 
     @staticmethod
     def ensure_dir_exists(path: str) -> None:
         """
-        Crée un répertoire s'il n'existe pas encore.
-        
+        Crée un dossier s'il n'existe pas.
+
         Args:
-            path (str): Chemin du répertoire.
+            path (str): Chemin du dossier.
         """
         if not os.path.exists(path):
             os.makedirs(path, exist_ok=True)
@@ -97,24 +104,24 @@ class FileUtils:
     def calculate_hash(data: str) -> str:
         """
         Calcule le hash SHA256 d'une chaîne de caractères.
-        
+
         Args:
-            data (str): Données à hasher.
-        
+            data (str): Texte à hasher.
+
         Returns:
-            str: Hash SHA256.
+            str: Empreinte numérique du texte.
         """
         return hashlib.sha256(data.encode('utf-8')).hexdigest()
 
     @staticmethod
     def is_module_available(module_name: str) -> bool:
         """
-        Vérifie si un module Python est disponible.
-        
+        Vérifie si un module Python est installé et accessible.
+
         Args:
             module_name (str): Nom du module à tester.
-        
+
         Returns:
-            bool: True si disponible, sinon False.
+            bool: True si le module est disponible, sinon False.
         """
         return importlib.util.find_spec(module_name) is not None
