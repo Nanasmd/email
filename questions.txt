@@ -1,0 +1,93 @@
+🎯 SCRIPT DE QUESTIONS/RÉPONSES — FICHIER PAR FICHIER
+📂 src/fetcher/email_fetcher.py
+Questions possibles :
+
+Pourquoi avoir séparé la connexion email dans un fichier spécifique ?
+👉 « Pour respecter le principe de séparation des responsabilités : ce fichier gère uniquement tout ce qui touche à IMAP et aux emails. »
+
+Pourquoi utiliser imaplib + email.message ?
+👉 « imaplib sert à se connecter en IMAP et récupérer les mails, et email.message sert à parser proprement le contenu brut en objets facilement manipulables. »
+
+Pourquoi SSL en option (use_ssl) ?
+👉 « Pour laisser la flexibilité selon le serveur : certains utilisent IMAP simple, d'autres imposent SSL. »
+
+Pourquoi fetch_limit ?
+👉 « Pour éviter de télécharger toute la boîte mail et limiter la charge. »
+
+📂 src/analyzer/email_analyzer.py
+Questions possibles :
+
+Pourquoi faire une analyse via GPT-4 ?
+👉 « Pour obtenir une extraction intelligente de données complexes sans devoir tout coder manuellement. GPT-4 interprète même des emails non structurés. »
+
+Pourquoi passer le texte brut de l’email à GPT au lieu d’analyser nous-même ?
+👉 « Parce que GPT-4 est capable de comprendre naturellement le langage humain, de repérer les intentions et d'en extraire les données avec plus de flexibilité qu'une regex ou qu'un parsing classique. »
+
+Comment est formulée la requête envoyée à GPT-4 ?
+👉 « On envoie un prompt clair pour demander des réponses précises formatées (titre, client, etc.). »
+
+Pourquoi utiliser un seuil de confiance (confidence_threshold) ?
+👉 « Pour filtrer les réponses incertaines et éviter d’enregistrer des données incomplètes ou fausses. »
+
+📂 src/database/project_database.py
+Questions possibles :
+
+Pourquoi utiliser SQLite au lieu d'une base MySQL ou PostgreSQL ?
+👉 « SQLite est léger, portable, intégré à Python par défaut et parfait pour un projet local sans serveur nécessaire. »
+
+Comment les données sont-elles structurées ?
+👉 « Chaque projet est enregistré dans une table avec des colonnes comme titre, description, client, etc. »
+
+Pourquoi avoir séparé save_project() et get_full_project_data() ?
+👉 « Pour modulariser : l'un enregistre, l'autre extrait. Ça rend les opérations indépendantes, claires et réutilisables. »
+
+📂 src/reporter/report_generator.py
+Questions possibles :
+
+Pourquoi générer des rapports ?
+👉 « Pour produire des fiches récapitulatives claires que l’on peut exploiter facilement : transmission, archivage, suivi client... »
+
+Pourquoi utiliser Pandas pour faire les rapports ?
+👉 « Parce que Pandas facilite la création de tableaux et leur export propre en CSV, Excel ou autres formats rapidement. »
+
+Comment est organisé le contenu du rapport ?
+👉 « Le rapport contient toutes les informations extraites : titre, description, client, etc., avec un formatage standardisé. »
+
+📂 src/core/logger.py
+Questions possibles :
+
+Pourquoi avoir mis en place un logger personnalisé ?
+👉 « Pour tracer tout ce qui se passe dans l’application : succès, erreurs, étapes critiques. C’est indispensable pour le suivi et le debugging. »
+
+Pourquoi utiliser un RotatingFileHandler ?
+👉 « Pour éviter que le fichier de logs devienne trop gros : il limite la taille maximale et garde des archives. »
+
+📂 src/config/config.py + config.json
+Questions possibles :
+
+Pourquoi centraliser la configuration dans un fichier config.json ?
+👉 « Pour que tous les paramètres puissent être modifiés sans jamais toucher au code source. Plus propre, plus sécurisé, plus flexible. »
+
+Comment protéger les données sensibles ?
+👉 « En production réelle, on ne laisserait pas config.json en clair. On utiliserait des variables d’environnement et des outils comme python-dotenv. »
+
+Que contient le fichier de configuration ?
+👉 « Tout ce qui est dépendant de l’environnement : serveur email, compte email, clé API OpenAI, chemins de base de données, etc. »
+
+📜 run.sh
+Questions possibles :
+
+Pourquoi avoir créé un script run.sh ?
+👉 « Pour simplifier l'exécution du projet. Un simple ./run.sh suffit pour lancer toute l'application sans que l'utilisateur ait besoin de connaître Python. »
+
+Que fait ce script exactement ?
+👉 « Il crée l'environnement virtuel, installe les dépendances, active l'environnement et lance l'application automatiquement. »
+
+📜 clean.sh
+Questions possibles :
+
+Pourquoi avoir fait un script de nettoyage ?
+👉 « Pour permettre de réinitialiser complètement l’environnement sans laisser de résidus : base de données, rapports, environnement virtuel, logs... »
+
+Quand faut-il l’utiliser ?
+👉 « Quand on veut repartir à zéro, faire un ménage complet avant un nouveau test, ou préparer une nouvelle livraison du projet. »
