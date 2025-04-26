@@ -1,17 +1,16 @@
 {
-    "imap_server": "imap.gmail.com",
-    "imap_port": 993,
-    "email_user": "",
-    "email_pass": "",
-    "use_ssl": true,
-    "fetch_limit": 10,
-    "openai_api_key": "",
-    "gpt_model": "gpt-4",
-    "confidence_threshold": 0.75,
-    "database_path": "projects.db",
-    "reports_dir": "reports",
-    "logs_dir": "logs",
-    "max_log_size": 5242880,
-    "backup_log_count": 3
-  }
-  
+    "imap_server": "imap.gmail.com",           // Adresse du serveur pour lire les emails (ici Gmail)
+    "imap_port": 993,                           // Port sécurisé pour la connexion IMAP
+    "email_user": "",                           // Identifiant de connexion (à compléter par l'utilisateur)
+    "email_pass": "",                           // Mot de passe de connexion (à compléter par l'utilisateur)
+    "use_ssl": true,                            // Utilisation du SSL pour sécuriser la connexion
+    "fetch_limit": 10,                          // Nombre maximum d'emails à récupérer par session
+    "openai_api_key": "",                       // Clé API OpenAI pour interroger l'IA (à compléter par l'utilisateur)
+    "gpt_model": "gpt-4",                       // Modèle IA utilisé (GPT-4)
+    "confidence_threshold": 0.75,               // Seuil de confiance minimal pour accepter une réponse IA
+    "database_path": "projects.db",             // Chemin du fichier de base de données SQLite
+    "reports_dir": "reports",                   // Dossier où seront enregistrés les rapports
+    "logs_dir": "logs",                         // Dossier où seront stockés les logs
+    "max_log_size": 5242880,                    // Taille maximale d'un fichier de log avant rotation (5 Mo)
+    "backup_log_count": 3                       // Nombre de fichiers de log de sauvegarde conservés
+}
