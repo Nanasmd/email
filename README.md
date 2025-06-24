@@ -1,4 +1,3 @@
-Sure — here’s a complete, professional `README.md` you can copy-paste directly into your GitHub repo [`email`](https://github.com/Nanasmd/email). You can customize the placeholders as needed:
 
 ```markdown
 # 📧 Email Utility
@@ -23,7 +22,7 @@ A minimal, secure, and developer-friendly CLI + API for sending emails via SMTP 
 - A valid SMTP provider (e.g. Gmail, SendGrid, Mailgun)
 - Environment variables:
 
-```
+
 
 SMTP\_HOST=
 SMTP\_PORT=
