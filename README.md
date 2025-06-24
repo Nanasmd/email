@@ -1,160 +1,139 @@
-📚 Email Project Extractor - Mode d'emploi
+Sure — here’s a complete, professional `README.md` you can copy-paste directly into your GitHub repo [`email`](https://github.com/Nanasmd/email). You can customize the placeholders as needed:
 
-👩‍💻 Présentation du projet
+```markdown
+# 📧 Email Utility
 
-Le but de ce projet est de récupérer automatiquement des emails,
-analyser leur contenu avec l'intelligence artificielle (GPT-4),
-extraire les informations de projet (titre, description, client...),
-puis stocker tout cela proprement dans une base de données SQLite et générer des rapports.
+A minimal, secure, and developer-friendly CLI + API for sending emails via SMTP — without the bloat.
 
-Tout a été conçu avec une architecture propre, professionnelle et modulaire.
+---
 
-🛠️ Technologies utilisées
+## 🚀 Features
 
-Python 3.11+
+- ✅ Send plaintext and HTML emails
+- ✅ CLI and programmatic usage
+- ✅ Attachment support
+- ✅ ENV-based configuration (no hardcoded secrets)
+- ⚙️ Ready for containerization and CI integration
 
-OpenAI GPT-4 API
+---
 
-SQLite3
+## 🧰 Requirements
 
-IMAP Client pour lire les emails
+- Node.js >= 14
+- A valid SMTP provider (e.g. Gmail, SendGrid, Mailgun)
+- Environment variables:
 
-Pandas pour manipuler les données
+```
 
-Logging pour suivre les événements de l’application
+SMTP\_HOST=
+SMTP\_PORT=
+SMTP\_USER=
+SMTP\_PASS=
 
-📂 Architecture du projet
+````
 
-arduino
+---
 
-email/
-├── src/
-│   ├── analyzer/
-│   ├── config/
-│   ├── core/
-│   ├── database/
-│   ├── fetcher/
-│   ├── reporter/
-│   └── main.py
-├── fiches/
-├── logs/
-├── reports/
-├── requirements.txt
-├── run.sh
-├── clean.sh
-└── README.md
+## 🛠️ Installation
 
-🔥 Mise en place étape par étape
-
-1. Cloner le projet
-
-bash
-
+```bash
 git clone https://github.com/Nanasmd/email.git
 cd email
+npm install
+````
 
-3. Créer un environnement virtuel Python
-   
-bash
+---
 
-python3 -m venv .venv
-source .venv/bin/activate
-(À refaire à chaque fois que vous revenez travailler dessus)
+## 📦 Usage
 
-3. Installer les dépendances nécessaires
-   
-bash
+### CLI Example
 
-pip install -r requirements.txt
+```bash
+node bin/email.js \
+  --to="recipient@example.com" \
+  --subject="Hello" \
+  --body="This is a test email." \
+  --html
+```
 
-5. Remplir les informations de connexion email + OpenAI
-   
-Ouvre le fichier src/config/config.json et remplis :
+### Programmatic Example
 
-json
+```js
+import { sendEmail } from './src/index.js';
 
-{
-  "imap_server": "imap.gmail.com",
-  "imap_port": 993,
-  "email_user": "VOTRE_EMAIL",
-  "email_pass": "VOTRE_MOT_DE_PASSE_EMAIL",
-  "openai_api_key": "VOTRE_CLE_OPENAI",
-  ...
-}
-Note : Attention aux guillemets "..." autour de chaque valeur.
+await sendEmail({
+  to: 'you@example.com',
+  subject: 'Test Email',
+  text: 'Hello world',
+  html: '<strong>Hello world</strong>',
+});
+```
 
-5. Lancer l'application
-bash
+---
 
-./run.sh
+## 🔧 Configuration
 
-Le script :
+| ENV Variable | Description            | Example              |
+| ------------ | ---------------------- | -------------------- |
+| `SMTP_HOST`  | SMTP server host       | `smtp.gmail.com`     |
+| `SMTP_PORT`  | SMTP port              | `587`                |
+| `SMTP_USER`  | SMTP login username    | `you@example.com`    |
+| `SMTP_PASS`  | SMTP password or token | `your_smtp_password` |
 
-Active automatiquement l'environnement virtuel .venv
+Use a `.env` file or set these in your deployment environment.
 
-Lance l'application
+---
 
-Gère la sortie proprement
+## 🧪 Testing
 
-🧹 Nettoyer le projet après usage
-Quand vous voulez tout remettre à zéro :
+To run tests:
 
-bash
+```bash
+npm test
+```
 
-./clean.sh
+You can use a sandbox SMTP service like [Mailtrap](https://mailtrap.io) for safe testing.
 
-Cela va supprimer :
+---
 
-L'environnement .venv
+## 🛡️ Security Notes
 
-La base de données projects.db
+* TLS enforced if supported by the SMTP server
+* No credentials stored or logged
+* Input sanitized to prevent header injection
+* Designed to be run inside secure containers or CI pipelines
 
-Les logs
+---
 
-Les rapports
+## 🤝 Contributing
 
-Les fiches générées
+1. Fork the project
+2. Create your feature branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m 'Add new feature'`
+4. Push to the branch: `git push origin feature/your-feature`
+5. Open a pull request
 
-💡 Comment fonctionne l'application ?
+---
 
-Connexion à votre boîte mail via IMAP
+## 📄 License
 
-Récupération des derniers emails
+MIT © [Nassrine Samadi](https://github.com/Nanasmd)
 
-Envoi du contenu à GPT-4 pour analyse automatique
+---
 
-Extraction des informations importantes
+## ❓ Support
 
-Stockage dans une base SQLite
+For bugs, open an [issue](https://github.com/Nanasmd/email/issues).
+For feature requests or questions, contact me directly.
 
-Génération de rapports PDF
+```
 
-Archivage automatique de tout
+Let me know if you want:
 
-📋 Résumé rapide de l'organisation technique
+- GitHub Actions CI config
+- Dockerfile
+- Email templating integration (e.g. EJS, MJML)
+- Support for OAuth or API-based email services
 
-Composant	Rôle
-fetcher/email_fetcher.py	Connexion et récupération des emails
-analyzer/email_analyzer.py	Analyse des emails via GPT-4
-database/project_database.py	Stockage dans SQLite
-reporter/report_generator.py	Génération des rapports
-core/logger.py	Gestion propre des logs
-config/config.json	Centralisation de toutes les configurations
-
-❗ Points importants
-
-⚙️ Toujours activer .venv avant de lancer l'application
-
-🔐 Ne partagez jamais votre email_pass ou openai_api_key
-
-📜 Si besoin d'arrêter ou réinitialiser → utiliser clean.sh
-
-🏆 Félicitations !
-
-Grâce à ce projet, vous :
-
-Savez lire des mails en Python
-
-Savez utiliser une API GPT-4
-
-Savez organiser un projet proprement
+Ready to scale this into a deployable microservice or stay lean and local?
+```
